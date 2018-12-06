@@ -14,12 +14,11 @@ class Linkedlist(object):
         return self.length == 0
 
     # 链表添加值操作
-    def append(self, node):
-        # 首先判断node是否为一个Node对象, 若不是则转换其类型
-        if not isinstance(node, Node):
-            node = Node(data=node)
+    def append(self, data):
+        # 转换输入值类型
+        node = Node(data)
         # 判断列表是否为空，若是则将head指向当前添加的node
-        if self.is_empty():
+        if self.head is None:
             self.head = node
         else:
             # 遍历该list的node,直到某node不存在next，将要添加的node赋给其作为next，并且length+1
@@ -30,13 +29,13 @@ class Linkedlist(object):
         self.length += 1
 
     # 链表的插入操作
-    def insert(self, value, index):
+    def insert(self, data, index):
         if type(index) is int:
             if index > self.length:
-                print('index value is out of range')
+                print('index out of range')
             else:
                 # 获取要插入的node，以及要被插入位置的前一项node（初始化为head）
-                insert_node = Node(data=value)
+                insert_node = Node(data)
                 current_node = self.head
                 # 若要插入的索引位置为0，即将要插入的node作为head，且其next为原先的head
                 if index == 0:
@@ -50,50 +49,58 @@ class Linkedlist(object):
                     # 切换两个node的next指向
                     insert_node.next = current_node.next
                     current_node.next = insert_node
-                # 无论插入位置，length均 + 1
                 self.length += 1
         else:
-            print('index value is not int')
+            print('index not int')
+
+    # 链表反转
+    def reverse(self):
+        # 三指针法
+        if not self.head or not self.head.next:
+            return self.head
+        cur = self.head
+        pre = None
+        nex = None
+        while cur:
+            nex = cur.next
+            cur.next = pre
+            pre = cur
+            cur = nex
+        self.head = pre
 
     # 链表的删除操作
     def delete(self, index):
         if type(index) is int:
             if index <= self.length:
-                # 若要删除的位置为0，将head指向原先head的next
                 if index == 0:
                     self.head = self.head.next
                 else:
-                    # 将位置移动到要delete的位置
-                    current_node = self.head
-                    while index-1 >0:
-                        current_node = current_node.next
+                    cur = self.head
+                    while index - 1 > 0:
+                        cur = cur.next
                         index -= 1
-                    # 将要删除的node的前一个node的next指向该要删除node的next，即可在链表中去除指定node
-                    current_node.next = current_node.next.next
-                # 无论插入位置，length均 -1
+                    cur.next = cur.next.next
                 self.length -= 1
             else:
-                print("index value out of range")
+                print("index out of range")
         else:
-            print("index value is not int")
+            print("index not int")
 
     # 链表的清空操作
     def clear(self):
         self.head = None
         self.length = 0
-        print('linked list cleared')
 
     # 链表整体打印操作
-    def print_linked_list(self):
+    def show(self):
         if self.length == 0:
-            print("Linked list's length is 0")
+            print("Linkedlist's is None")
         else:
-            tmp_node = self.head
-            print("head:", tmp_node.data, end=' ')
-            while tmp_node.next:
-                tmp_node = tmp_node.next
-                print("-->", tmp_node.data, end=' ')
-            print('   length = {}\n'.format(self.length))
+            tmp = self.head  # 注意这里要将head赋给一个tmp，不能直接使用head进行遍历
+            while tmp:
+                print(tmp.data, end=' ')
+                tmp = tmp.next
+            print('\n')
 
 
 if __name__ == "__main__":
@@ -103,8 +110,10 @@ if __name__ == "__main__":
     l.append(5)
     l.insert(4, 2)
     l.insert(1, 0)
-    l.print_linked_list()
-    l.delete(4)
-    l.print_linked_list()
+    l.show()
+    l.reverse()
+    l.show()
+    l.delete(2)
+    l.show()
     l.clear()
-    l.print_linked_list()
+    l.show()
