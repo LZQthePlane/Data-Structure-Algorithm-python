@@ -1,5 +1,6 @@
 # Data-Structure & Algorithms implementing with python
 
-1. **Single Linked list**,including *append, insert, delete, reverse, clear et.al*
-2. **Double Linked list**,including *append*
-3. **Binary Search**
+ - **Single Linked list**,including *append, insert, delete, reverse, clear et.al*
+ - **Double Linked list**,including *append*
+ - **Binary Search**
+ - **Tree Traversal**, including *pre/in/post traversal* implemented by recursion and stack, *append, get_depth*
