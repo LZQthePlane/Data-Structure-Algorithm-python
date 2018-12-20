@@ -4,6 +4,7 @@
  - including **append, insert, delete, reverse, clear et.al**
 ### Double Linked list
  - including **append**
-### Binary Search
+### Binary Search   
+ - just for ordered array but linkedlist
 ### Tree Traversal
  - including **pre/in/post traversal** implemented by recursion and stack, **append, get_depth**
