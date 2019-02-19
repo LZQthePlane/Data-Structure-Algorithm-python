@@ -9,4 +9,4 @@
 ### Tree Traversal
  - including **pre/in/post traversal** implemented by recursion and stack, **append, get_depth**
 ### Sort algorithm
- - including **Bubble sort** 
+ - including **Bubble sort**, **Inserction sort**, **Shell sort**, **Selection sort**
