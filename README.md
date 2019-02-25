@@ -8,5 +8,7 @@
  - just for ordered array but linkedlist
 ### Tree Traversal
  - including **pre/in/post traversal** implemented by recursion and stack, **append, get_depth**
+### Binary Search Tree (BST)
+ - including **insert, find, find_max/min, delete**
 ### Sort algorithm
  - including **Bubble sort**, **Insertion sort**, **Shell sort**, **Selection sort**
