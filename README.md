@@ -10,5 +10,7 @@
  - including **pre/in/post traversal** implemented by recursion and stack, **append, get_depth**
 ### Binary Search Tree (BST)
  - including **insert, find, find_max/min, delete**
+### Min Heap
+ - including **insert, delete_min, create_heap, Get_min, clear**
 ### Sort algorithm
  - including **Bubble sort**, **Insertion sort**, **Shell sort**, **Selection sort**
