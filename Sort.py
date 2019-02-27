@@ -106,14 +106,14 @@ def heap_sort(my_list):
             parent_idx = child_idx
         l[parent_idx] = tmp
 
-    def creat_maxheap(l):
+    def creat_max_heap(l):
         length = len(l) - 1
         for parent_idx in range(length//2, -1, -1):
             adjust_down(l, parent_idx, length)
         return l
 
     # 建立最大堆
-    creat_maxheap(my_list)
+    creat_max_heap(my_list)
     for i in range(len(my_list)-1, 0, -1):
         # 将last元素与堆顶最大元素互换
         my_list[i], my_list[0] = my_list[0], my_list[i]
