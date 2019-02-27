@@ -122,7 +122,58 @@ def heap_sort(my_list):
     return my_list
 
 
-test_list = [1, 5, 3, 7, 10, 9, 6, 4, 2, 8]
-result = heap_sort(test_list)
+def merge_sort(my_list):
+    """
+    归并排序：采用分治法，结合二叉树性质
+    优点：无适应性问题，无论对于什么样的序列它都要做logN遍的递归，时间复杂度是固定的NlogN，算法稳定
+    缺点：空间复杂度为N，较大
+    """
+    def merge(left, right):
+        """将两个有序的子序列，合并为一个序列"""
+        i, j = 0, 0  # 设置两个指针，分别在一开始指向两个子序列的第一项
+        merged = []  # 返回的合并后的序列
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                merged.append(left[i])
+                i += 1
+            else:
+                merged.append(right[j])
+                j += 1
+        if len(left[i:]) > 0:
+            merged.extend(left[i:])
+        if len(right[j:]) > 0:
+            merged.extend(right[j:])
+        return merged
+
+    # # 递归方法：不断对子序列进行merge_sort再合并
+    # if len(my_list) <= 1:
+    #     return my_list
+    # middle = len(my_list) // 2
+    # left = merge_sort(my_list[0:middle])
+    # right = merge_sort(my_list[middle:])
+    # return merge(left, right)
+
+    # 非递归方法
+    # 第一层循环表示归并的次数:第一次分成n个长度为1的子数组，进行归并,第二次分成n/2个长度为2的子数组....
+    # 一个长度为n的数组需要归并logN次。第二层循环表示把两个子数组进行归并
+    sub_list_len = 1
+    list_len = len(my_list)
+    while sub_list_len < list_len:
+        low = 0
+        while low < len(my_list):
+            middle = low + sub_list_len
+            height = min(low + 2*sub_list_len, list_len)
+            if middle < height:
+                left = my_list[low: middle]
+                right = my_list[middle: height]
+                tmp = merge(left, right)
+                my_list[low: height] = tmp
+            low += 2*sub_list_len
+        sub_list_len *= 2
+    return my_list
+
+
+test_list = [1, 5, 3, 7, 10, 9, 6, 11, 4, 2, 8]
+result = merge_sort(test_list)
 for item in result:
     print(item)
