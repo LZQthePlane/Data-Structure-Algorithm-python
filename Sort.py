@@ -85,7 +85,44 @@ def selection_sort(my_list):
     return my_list
 
 
-test_list = [1, 5, 3, 7, 9, 6, 4, 2, 8]
-result = selection_sort(test_list)
+def heap_sort(my_list):
+    """
+    堆排序：利用最大堆进行改进，也是选择排序的思路演变而来
+    时间复杂度：小于O（nlogn），空间复杂度：O（nlogn）
+    缺点：不稳定
+    """
+    def adjust_down(l, parent_idx, length):
+        tmp = l[parent_idx]
+        while True:
+            child_idx = parent_idx * 2 + 1
+            if child_idx > length:
+                break
+            if child_idx != length and l[child_idx] < l[child_idx+1]:
+                child_idx += 1
+            if tmp < l[child_idx]:
+                l[parent_idx] = l[child_idx]
+            else:
+                break
+            parent_idx = child_idx
+        l[parent_idx] = tmp
+
+    def creat_maxheap(l):
+        length = len(l) - 1
+        for parent_idx in range(length//2, -1, -1):
+            adjust_down(l, parent_idx, length)
+        return l
+
+    # 建立最大堆
+    creat_maxheap(my_list)
+    for i in range(len(my_list)-1, 0, -1):
+        # 将last元素与堆顶最大元素互换
+        my_list[i], my_list[0] = my_list[0], my_list[i]
+        # 再在循环进行下沉过程中,不断剔除当前的最大项(第i项)
+        adjust_down(my_list, 0, i-1)
+    return my_list
+
+
+test_list = [1, 5, 3, 7, 10, 9, 6, 4, 2, 8]
+result = heap_sort(test_list)
 for item in result:
     print(item)

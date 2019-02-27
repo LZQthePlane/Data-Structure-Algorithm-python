@@ -33,7 +33,7 @@ class MinHeap(object):
         self.heap[pos] = data
 
     def delete_min(self):
-        """删除堆顶元素"""
+        """删除堆顶元素，复杂度logN"""
         if self.__len__() < 1:
             print('Heap is empty.')
             return
