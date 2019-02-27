@@ -13,4 +13,4 @@
 ### Min Heap
  - including **insert, delete_min, create_heap, Get_min, clear**
 ### Sort algorithm
- - including **Bubble sort**, **Insertion sort**, **Shell sort**, **Selection sort**
+ - including **Bubble sort, Insertion sort, Shell sort, Selection sort， Heap sort**
