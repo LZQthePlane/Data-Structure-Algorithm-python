@@ -91,13 +91,13 @@ def heap_sort(my_list):
     时间复杂度：小于O（nlogn），空间复杂度：O（nlogn）
     缺点：不稳定
     """
-    def adjust_down(l, parent_idx, length):
+    def adjust_down(l, parent_idx, l_length):
         tmp = l[parent_idx]
         while True:
             child_idx = parent_idx * 2 + 1
-            if child_idx > length:
+            if child_idx > l_length:
                 break
-            if child_idx != length and l[child_idx] < l[child_idx+1]:
+            if child_idx != l_length and l[child_idx] < l[child_idx+1]:
                 child_idx += 1
             if tmp < l[child_idx]:
                 l[parent_idx] = l[child_idx]
@@ -106,15 +106,15 @@ def heap_sort(my_list):
             parent_idx = child_idx
         l[parent_idx] = tmp
 
-    def creat_max_heap(l):
-        length = len(l) - 1
-        for parent_idx in range(length//2, -1, -1):
-            adjust_down(l, parent_idx, length)
+    def creat_max_heap(l, l_length):
+        for parent_idx in range(l_length//2, -1, -1):
+            adjust_down(l, parent_idx, l_length)
         return l
 
     # 建立最大堆
-    creat_max_heap(my_list)
-    for i in range(len(my_list)-1, 0, -1):
+    length = len(my_list) - 1
+    creat_max_heap(my_list, length)
+    for i in range(length, 0, -1):
         # 将last元素与堆顶最大元素互换
         my_list[i], my_list[0] = my_list[0], my_list[i]
         # 再在循环进行下沉过程中,不断剔除当前的最大项(第i项)
