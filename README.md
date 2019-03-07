@@ -12,6 +12,8 @@
  - including **insert, find, find_max/min, delete**
 ### Min Heap
  - including **insert, delete_min, create_heap, Get_min, clear**
+### Huffman Tree and Huffman Coding
+ - using Min_heap for efficiency
 ### Sort algorithm
  - including **Bubble sort, Insertion sort, Shell sort, Selection sort， Heap sort, Merge sort**
  <p align>
