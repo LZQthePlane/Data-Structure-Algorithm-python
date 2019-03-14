@@ -174,7 +174,44 @@ def merge_sort(my_list):
     return my_list
 
 
-test_list = [1, 5, 3, 7, 10, 9, 6, 11, 4, 2, 8]
-result = merge_sort(test_list)
+def quick_sort(my_list):
+    """
+    快速排序算法，是最实用的排序算法，各大语言标准库的排序函数也基本都是基于快排实现的
+    优点：平均时间复杂度O(NlogN), 空间复杂度至少O(logN)
+    缺点：不稳定
+    """
+    def q_sort(array, low, high):
+        # 如果说明子集已经划分到最小，无需再排序
+        if low >= high:
+            return
+        # 取最后一个元素为基准，这里的选基准方案是快排的一个改进空间
+        pivot = array[high]
+        # i,j分别为指针
+        i, j = low, high
+        while True:
+            # 将i右移到第一个大于pivot的位置
+            while i < j and array[i] <= pivot:
+                i += 1
+            # 将j左移到第一个小于pivot的位置
+            while i < j and array[j] >= pivot:
+                j -= 1
+            # 如果i，j转移完成后依然满足i<j，交换二者的位置
+            # 如果不满足，跳出循环
+            if i < j:
+                array[i], array[j] = array[j], array[i]
+            else:
+                break
+        # 再将pivot与j位置交换，pivot此时处于其最终的位置
+        array[j], array[high] = array[high], array[j]
+        # 对子集进行递归
+        q_sort(array, low, i - 1)
+        q_sort(array, i + 1, high)
+
+    q_sort(my_list, 0, len(my_list)-1)
+    return my_list
+
+
+test_list = [1, 12, 5, 3, 7, 10, 14, 9, 6, 11, 4, 15, 13, 2, 8]
+result = quick_sort(test_list)
 for item in result:
     print(item)
