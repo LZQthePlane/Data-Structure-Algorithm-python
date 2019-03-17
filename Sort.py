@@ -1,3 +1,4 @@
+# https://blog.csdn.net/qq_41431457/article/details/85262605
 def bubble_sort(my_list):
     """
     冒泡排序
@@ -57,18 +58,28 @@ def shell_sort(my_list):
     希尔排序：分组插入排序,插入排序的改进版
     定义一个增量序列（逐渐减小直至为1），按照序列中元素的大小，间隔地进行插入排序
     插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位
-    缺点：非稳定
+
+    时间复杂度：时间复杂度比较复杂，通常认为O(n*logn)，当n趋近于无穷大时，可以为O（n(logn)^2)
+    空间复杂度：O（1）
+    稳定性：不稳定
+
+    希尔排序只能用于顺序存储结构，不能用于链式存储结构，增量gap可以有各种取法，但最后一次gap必须等于1,
+    总比较次数和移动次数较直接插入排序少，当n越大，序列越无序时，效果越明显。
     """
     list_length = len(my_list)
     gap = list_length // 2
     while gap > 0:
-        for i in range(gap, list_length):
-            # 间隔地进行插入排序，这里用的是比较大小交换位置的方法
-            # 上述的插入排序中用的是比较并向后移位的方法
-            # 看视频更易理解
-            while i > gap and my_list[i] < my_list[i-gap]:
-                my_list[i], my_list[i-gap] = my_list[i-gap], my_list[i]
-                i -= gap
+        # 对每隔gap的元素集合，进行简单插入排序
+        for i in range(gap, list_length, gap):
+            # 默认已有一张牌j，从i开始作比较
+            j = i - gap
+            tmp = my_list[i]
+            # 从后往前循环，比较大小
+            while j >= 0 and tmp < my_list[j]:
+                my_list[j + gap] = my_list[j]
+                j -= gap
+            # 将新牌tmp插入保存的插入位置，因为上一步循环最后j减去了一个gap，需要加上
+            my_list[j + gap] = tmp
         gap //= 2
     return my_list
 
@@ -250,6 +261,6 @@ def radix_sort(my_list):
 
 
 test_list = [1, 12, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
-result = radix_sort(test_list)
+result = shell_sort(test_list)
 for item in result:
     print(item)
