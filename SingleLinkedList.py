@@ -71,7 +71,7 @@ class Linkedlist(object):
     # 链表的删除操作
     def delete(self, index):
         if type(index) is int:
-            if index <= self.length:
+            if index < self.length:
                 if index == 0:
                     self.head = self.head.next
                 else:
@@ -85,6 +85,37 @@ class Linkedlist(object):
                 print("index out of range")
         else:
             print("index not int")
+
+    # 将某处的节点与其下一节点位置互换
+    def swap_pair(self, index):
+        if type(index) is not int:
+            print('index not range')
+            return
+        if index < self.length - 1:
+            # 链表头两位的swap
+            if index == 0:
+                node1 = self.head
+                node2 = self.head.next
+
+                self.head = node2
+                node1.next = node2.next
+                node2.next = node1
+            else:
+                # 将指针移动到待置换位置的前一位
+                cur = self.head
+                while index - 1 > 0:
+                    cur = cur.next
+                    index -= 1
+                node1 = cur.next
+                node2 = node1.next
+                late = node2.next
+
+                cur.next = node2
+                node2.next = node1
+                node1.next = late
+
+        else:
+            print('index out of range')
 
     # 链表的清空操作
     def clear(self):
@@ -108,12 +139,15 @@ if __name__ == "__main__":
     l.append(2)
     l.append(3)
     l.append(5)
+    l.append(8)
     l.insert(4, 2)
     l.insert(1, 0)
     l.show()
     l.reverse()
     l.show()
-    l.delete(2)
+    l.delete(4)
+    l.show()
+    l.swap_pair(0)
     l.show()
     l.clear()
     l.show()
