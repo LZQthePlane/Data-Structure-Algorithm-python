@@ -15,6 +15,6 @@
 ### Huffman Tree and Huffman Coding
  - using Min_heap for efficiency
 ### Sort algorithm
- - including **Bubble sort, Insertion sort, Shell sort, Selection sort， Heap sort, Merge sort，Quick sort**
+ - including **Bubble sort, Insertion sort, Shell sort, Selection sort， Heap sort, Merge sort，Quick sort, Radix sort**
  <p align>
     <img src="https://upload-images.jianshu.io/upload_images/4251424-8d79360387a74e70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/966/format/webp", width="720">

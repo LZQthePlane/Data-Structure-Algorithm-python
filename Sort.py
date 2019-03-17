@@ -211,7 +211,40 @@ def quick_sort(my_list):
     return my_list
 
 
-test_list = [1, 12, 5, 3, 7, 10, 14, 9, 6, 11, 4, 15, 13, 2, 8]
-result = quick_sort(test_list)
+def radix_sort(my_list):
+    """
+    基数排序：桶排序的改进版
+    优点：时间复杂度O(D(N+R)),D为轮次（最大数有几位，即有及轮次），N为元素数，R为桶的数量（进制数）
+    可以看出广义上的线性排序方法，空间复杂度O(N+R),算法稳定
+    """
+    digit = 1  # 初始位数为个位，“次位优先”
+    max_digit = 1  # 最大数的位数有几位
+    max_item = max(my_list)
+    while max_item >= 10 ** max_digit:
+        max_digit += 1
+
+    while digit <= max_digit:
+        bucket = {}  # 用字典构建桶
+        for i in range(10):
+            bucket.setdefault(i, [])  # 将每个桶置空
+        for i in my_list:
+            radix = int(i / (10**(digit-1)) % 10)  # 获取每个元素在当前位数的基数
+            bucket[radix].append(i)  # 将对应基数的元素加到对应的桶当中
+        # 再将桶中的元素串接起来
+        tmp_list = []
+
+        for i in range(10):
+            if len(bucket[i]) > 0:
+                for j in bucket[i]:
+                    tmp_list.append(j)
+        my_list = tmp_list
+        # 位数进一，以进行下一轮次的排序
+        digit += 1
+
+    return my_list
+
+
+test_list = [1, 12, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
+result = radix_sort(test_list)
 for item in result:
     print(item)
