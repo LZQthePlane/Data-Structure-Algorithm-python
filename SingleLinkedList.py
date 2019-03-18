@@ -79,7 +79,7 @@ class Linkedlist(object):
                     while index - 1 > 0:
                         cur = cur.next
                         index -= 1
-                    cur.next = cur.next.next
+                    cur.next = cur.next.next  # 核心操作
                 self.length -= 1
             else:
                 print("index out of range")
@@ -89,10 +89,10 @@ class Linkedlist(object):
     # 将某处的节点与其下一节点位置互换
     def swap_pair(self, index):
         if type(index) is not int:
-            print('index not range')
+            print('index not int')
             return
         if index < self.length - 1:
-            # 链表头两位的swap
+            # 链表头两位的swap，双指针法
             if index == 0:
                 node1 = self.head
                 node2 = self.head.next
@@ -101,7 +101,7 @@ class Linkedlist(object):
                 node1.next = node2.next
                 node2.next = node1
             else:
-                # 将指针移动到待置换位置的前一位
+                # 将指针移动到待置换位置的前一位，四指针法
                 cur = self.head
                 while index - 1 > 0:
                     cur = cur.next
@@ -113,7 +113,6 @@ class Linkedlist(object):
                 cur.next = node2
                 node2.next = node1
                 node1.next = late
-
         else:
             print('index out of range')
 
