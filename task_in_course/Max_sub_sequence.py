@@ -13,5 +13,5 @@ def max_subseq_sum(my_list):
     return max_sum
 
 
-l = [-1, 3, -2, 4, -6, 1, 6, -1]
+l = [-1, 3, 5, 4, -6, 1, 6, -1]
 print(max_subseq_sum(l))
