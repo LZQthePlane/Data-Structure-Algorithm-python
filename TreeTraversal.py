@@ -129,23 +129,24 @@ def post_order_stack(root):
     """
     堆栈实现后序遍历
     """
-    # 先遍历根节点，再遍历右子树，最后是左子树
-    # 这样就可以转化为和先序遍历一个类型了
-    # 最后把遍历结果逆序输出
+    # 假设一棵树。先序遍历是A-B-C；后序遍历则是B-C-A
+    # 如果在先序遍历时，先访问右节点，再访问左节点，即为A-C-B；正好为后续遍历的逆序
+    # 所以，只需要将改变后的先序遍历结果进行记录，最后把遍历结果逆序输出
     if not root:
         return None
     my_stack1 = []
-    my_stack2 = []
+    memory = []
     node = root
     while my_stack1 or node:
         while node:
+            memory.append(node)  # 将先序遍历中的print换为列表存储函数
             my_stack1.append(node)
-            my_stack2.append(node)
-            node = node.right
+            node = node.right  # 先访问右节点
         node = my_stack1.pop()
-        node = node.left
-    while my_stack2:
-        print(my_stack2.pop().data, end=',')
+        node = node.left  # 再访问左节点
+    # 逆序输出即可
+    while memory:
+        print(memory.pop().data, end=',')
 
 
 if __name__ == '__main__':
