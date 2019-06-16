@@ -36,8 +36,8 @@ class BST(object):
         elif x > bin_tree.data:
             return self.find(bin_tree.right, x)
         elif x == bin_tree.data:
-            return True
-        return bin_tree
+            print("Found")
+            return bin_tree
 
     def iter_find(self, bin_tree, x):
         """搜索操作，迭代实现"""
@@ -47,8 +47,9 @@ class BST(object):
             elif x > bin_tree.data:
                 bin_tree = bin_tree.right
             else:
-                return True
-        return False
+                print("Found")
+                return bin_tree
+        print("Not found")
 
     def find_max(self, bin_tree):
         """查询最大值，递归实现"""
@@ -107,8 +108,8 @@ for val in List:
 print('中序打印二叉搜索树：', end=' ')
 bst.print_tree(tree)
 
-print('')
-print('查询值16', bst.iter_find(tree, 16))
+print('\n查询值16')
+print(bst.iter_find(tree, 7))
 
 print('树中最大值为:', bst.find_max(tree).data)
 print('树中最小值为:', bst.find_min(tree).data)
