@@ -71,20 +71,23 @@ class BST(object):
         """删除操作，删除值为x的点"""
         if bin_tree is None:
             print('element not found')
+        # 先找到待删除的节点，类似于find函数
         if x < bin_tree.data:
             bin_tree.left = self.delete(bin_tree.left, x)
         elif x > bin_tree.data:
             bin_tree.right = self.delete(bin_tree.right, x)
         elif x == bin_tree.data:
             # 当找到时，分为两种情况：无子树+有单个子树、有左右两个子树
+
+            # 即有左子树，又有右子树时
             if bin_tree.left and bin_tree.right:
-                # 即有左子树，又有右子树时
-                # 先找到右子树中的最小值节点，用其代替被删除节点，再删除右子树中的最小节点
+                # 先找到右子树中的最小值节点，用其代替被删除节点 (或者是左子树中的最大值节点来代替)
                 tmp = self.find_min(bin_tree.right)
                 bin_tree.data = tmp.data
+                # 再删除右子树中的最小节点 （或左子树的最大节点）
                 bin_tree.right = self.delete(bin_tree.right, tmp.data)
+            # 若没有子树或者只有一个子树
             else:
-                # 若没有子树或者只有一个子树
                 if bin_tree.left is None:
                     bin_tree = bin_tree.right
                 elif bin_tree.right is None:
