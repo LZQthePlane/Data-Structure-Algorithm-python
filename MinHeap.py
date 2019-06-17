@@ -34,14 +34,13 @@ class MinHeap(object):
 
     def delete_min(self):
         """删除堆顶元素，复杂度logN"""
+
         if self.__len__() < 1:
             print('Heap is empty.')
             return
-
         # 用堆中的最后一个元素替换到根节点，再进行下沉到合适位置
-        last = self.heap.pop()
+        last_item = self.heap.pop()
         if self.__len__() > 1:  # 如果pop之后只有哨兵，无需进行下沉
-            tmp = last
             parent_idx = 1
             while True:
                 # child_idx为左子节点
@@ -51,24 +50,25 @@ class MinHeap(object):
                     break
                 # 在左右子节点中找更小的那个，即是与父节点进行位置交换的子节点
                 # 如果左子节点不为heap的最后一个元素（有右儿子），且右子节点更小，则将待置换的节点换为右子节点
-                if child_idx != self.__len__() and self.heap[child_idx] > self.heap[child_idx+1]:
+                if child_idx < self.__len__() and self.heap[child_idx] > self.heap[child_idx+1]:
                     child_idx += 1
-                # 如果tmp比儿子节点的值大，则不断用儿子替代父节点
-                if tmp > self.heap[child_idx]:
+                # 如果last_item比儿子节点的值大，则不断用儿子替代父节点
+                if last_item > self.heap[child_idx]:
                     self.heap[parent_idx] = self.heap[child_idx]
                 else:
                     break
                 # 儿子节点变为新的父节点
                 parent_idx = child_idx
             # 将tmp放到到合适位置
-            self.heap[parent_idx] = tmp
+            self.heap[parent_idx] = last_item
 
     def create_heap(self, list_data):
         """
-        直接创建一个小顶堆, 接收一个可迭代对象参数,
-        效果同insert, 效率比insert一个个插入高,时间复杂度为n
+        直接创建一个小顶堆，效果同insert一个个插入, 效率更高,时间复杂度为n
         """
+        # 先将全部元素按输入顺序存入，而后再进行位置上的调整
         self.heap.extend(list_data)
+        # 存在父节点的个数
         parent_num = self.__len__()//2
         # 对每一个父节点，进行下沉操作，由下至上，由右至左
         # 与delete_min中的下沉操作相同
@@ -78,7 +78,7 @@ class MinHeap(object):
                 child_idx = parent_idx * 2
                 if child_idx > self.__len__():
                     break
-                if child_idx != self.__len__() and self.heap[child_idx] > self.heap[child_idx+1]:
+                if child_idx < self.__len__() and self.heap[child_idx] > self.heap[child_idx+1]:
                     child_idx += 1
                 if tmp > self.heap[child_idx]:
                     self.heap[parent_idx] = self.heap[child_idx]
