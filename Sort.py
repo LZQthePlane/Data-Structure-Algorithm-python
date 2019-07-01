@@ -204,6 +204,7 @@ def quick_sort(my_list):
         pivot = array[high]
         # i,j分别为指针
         i, j = low, high
+
         while i < j:
             # 将i右移到第一个大于pivot的位置
             while i < j and array[i] <= pivot:
@@ -211,9 +212,9 @@ def quick_sort(my_list):
             # 将j左移到第一个小于pivot的位置
             while i < j and array[j] >= pivot:
                 j -= 1
-            # 如果i，j转移完成后依然满足i<j，交换二者的位置
+            # 交换二者的位置
             array[i], array[j] = array[j], array[i]
-        # 再将pivot与j位置交换，pivot此时处于其最终的位置
+        # 再将pivot与i和j的位置交换（二者此时指向同一位置），pivot此时处于其最终的位置
         array[i], array[high] = array[high], array[i]
         # 对子集进行递归
         q_sort(array, low, i - 1)
