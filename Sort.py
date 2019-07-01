@@ -194,7 +194,7 @@ def quick_sort(my_list):
     """
     快速排序算法，是最实用的排序算法，各大语言标准库的排序函数也基本都是基于快排实现的
     优点：平均时间复杂度O(NlogN), 空间复杂度至少O(logN)
-    缺点：不稳定
+    缺点：不稳定；对于小规模数据，递归效果并不好，可以调用简单排序如插入排序
     """
     def q_sort(array, low, high):
         # 如果说明子集已经划分到最小，无需再排序
@@ -218,7 +218,7 @@ def quick_sort(my_list):
             else:
                 break
         # 再将pivot与j位置交换，pivot此时处于其最终的位置
-        array[j], array[high] = array[high], array[j]
+        array[i], array[high] = array[high], array[i]
         # 对子集进行递归
         q_sort(array, low, i - 1)
         q_sort(array, i + 1, high)
@@ -260,7 +260,7 @@ def radix_sort(my_list):
     return my_list
 
 
-test_list = [1, 12, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
-result = shell_sort(test_list)
+test_list = [1, 12, 5, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
+result = quick_sort(test_list)
 for item in result:
     print(item)
