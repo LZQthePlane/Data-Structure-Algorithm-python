@@ -35,21 +35,12 @@ def insertion_sort(my_list):
     for i in range(1, list_length):
         # tmp为新抓的牌
         tmp = my_list[i]
-        # 如果新抓的牌比已有的最后一个元素（最大元素）大，则无需进行排序
-        if my_list[i] < my_list[i-1]:
-            # 初始化插入位置
-            insert_idx = 0
-            # 从后往前循环，比较大小
-            for j in range(i-1, -1, -1):
-                # 如果新牌小于当前元素，将当前元素往后移，并更新插入位置
-                if tmp < my_list[j]:
-                    my_list[j+1] = my_list[j]
-                    insert_idx = j
-                # 否则跳出循环
-                else:
-                    break
-            # 将新牌tmp插入保存的插入位置
-            my_list[insert_idx] = tmp
+        j = i - 1
+        # 从后往前循环，比较大小
+        while j >= 0 and tmp < my_list[j]:
+            my_list[j+1] = my_list[j]
+            j -= 1
+        my_list[j + 1] = tmp
     return my_list
 
 
@@ -72,8 +63,8 @@ def shell_sort(my_list):
         # 对每隔gap的元素集合，进行简单插入排序
         for i in range(gap, list_length, gap):
             # 默认已有一张牌j，从i开始作比较
-            j = i - gap
             tmp = my_list[i]
+            j = i - gap
             # 从后往前循环，比较大小
             while j >= 0 and tmp < my_list[j]:
                 my_list[j + gap] = my_list[j]
@@ -162,32 +153,32 @@ def merge_sort(my_list):
             merged.extend(right[j:])
         return merged
 
-    # # 递归方法：不断对子序列进行merge_sort再合并
-    # if len(my_list) <= 1:
-    #     return my_list
-    # middle = len(my_list) // 2
-    # left = merge_sort(my_list[0:middle])
-    # right = merge_sort(my_list[middle:])
-    # return merge(left, right)
+    # 递归方法：不断对子序列进行merge_sort再合并
+    if len(my_list) <= 1:
+        return my_list
+    middle = len(my_list) // 2
+    left = merge_sort(my_list[0:middle])
+    right = merge_sort(my_list[middle:])
+    return merge(left, right)
 
-    # 非递归方法
-    # 第一层循环表示归并的次数:第一次分成n个长度为1的子数组，进行归并,第二次分成n/2个长度为2的子数组....
-    # 一个长度为n的数组需要归并logN次。第二层循环表示把两个子数组进行归并
-    sub_list_len = 1
-    list_len = len(my_list)
-    while sub_list_len < list_len:
-        low = 0
-        while low < len(my_list):
-            middle = low + sub_list_len
-            height = min(low + 2*sub_list_len, list_len)
-            if middle < height:
-                left = my_list[low: middle]
-                right = my_list[middle: height]
-                tmp = merge(left, right)
-                my_list[low: height] = tmp
-            low += 2*sub_list_len
-        sub_list_len *= 2
-    return my_list
+    # # 非递归方法
+    # # 第一层循环表示归并的次数:第一次分成n个长度为1的子数组，进行归并,第二次分成n/2个长度为2的子数组....
+    # # 一个长度为n的数组需要归并logN次。第二层循环表示把两个子数组进行归并
+    # sub_list_len = 1
+    # list_len = len(my_list)
+    # while sub_list_len < list_len:
+    #     low = 0
+    #     while low < len(my_list):
+    #         middle = low + sub_list_len
+    #         height = min(low + 2*sub_list_len, list_len)
+    #         if middle < height:
+    #             left = my_list[low: middle]
+    #             right = my_list[middle: height]
+    #             tmp = merge(left, right)
+    #             my_list[low: height] = tmp
+    #         low += 2*sub_list_len
+    #     sub_list_len *= 2
+    # return my_list
 
 
 def quick_sort(my_list):
@@ -258,6 +249,6 @@ def radix_sort(my_list):
 
 
 test_list = [1, 12, 5, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
-result = quick_sort(test_list)
+result = insertion_sort(test_list)
 for item in result:
     print(item)
