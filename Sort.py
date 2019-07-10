@@ -98,30 +98,28 @@ def heap_sort(arr):
     时间复杂度：小于O（nlogn），空间复杂度：O（nlogn）
     缺点：不稳定
     """
-    def adjust_down(l, parent_idx, l_length):
-        tmp = l[parent_idx]
-        while True:
+    def adjust_down(arr, parent_idx, length):
+        tmp = arr[parent_idx]
+        while parent_idx*2 + 1 <= length:
             child_idx = parent_idx * 2 + 1
-            if child_idx > l_length:
-                break
-            if child_idx != l_length and l[child_idx] < l[child_idx+1]:
+            if child_idx != length and arr[child_idx] < arr[child_idx+1]:
                 child_idx += 1
-            if tmp < l[child_idx]:
-                l[parent_idx] = l[child_idx]
+            if tmp < arr[child_idx]:
+                arr[parent_idx] = arr[child_idx]
             else:
                 break
             parent_idx = child_idx
-        l[parent_idx] = tmp
+        arr[parent_idx] = tmp
 
-    def creat_max_heap(l, l_length):
-        for parent_idx in range(l_length//2, -1, -1):
-            adjust_down(l, parent_idx, l_length)
-        return l
+    def creat_max_heap(arr, length):
+        for parent_idx in range(length//2, -1, -1):
+            adjust_down(arr, parent_idx, length)
+        return arr
 
     # 建立最大堆
-    length = len(arr)
+    length = len(arr) - 1
     creat_max_heap(arr, length)
-    for i in range(length-1, 0, -1):
+    for i in range(length, 0, -1):
         # 将last元素与堆顶最大元素互换
         arr[i], arr[0] = arr[0], arr[i]
         # 再在循环进行下沉过程中,不断剔除当前的最大项(第i项)
@@ -249,6 +247,6 @@ def radix_sort(arr):
 
 
 test_list = [1, 12, 5, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
-result = radix_sort(test_list)
+result = heap_sort(test_list)
 for item in result:
     print(item, end=' ')
