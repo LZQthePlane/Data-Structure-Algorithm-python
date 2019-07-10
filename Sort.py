@@ -1,5 +1,5 @@
 # https://blog.csdn.net/qq_41431457/article/details/85262605
-def bubble_sort(my_list):
+def bubble_sort(arr):
     """
     冒泡排序
     时间复杂度：O(n^2), 空间复杂度：O(1)
@@ -7,21 +7,21 @@ def bubble_sort(my_list):
 
     冒泡排序较稳定，可用于链式存储结构，时间复杂度较高，当n较大，初始记录无序时，不宜采用此方法
     """
-    list_length = len(my_list)
+    list_length = len(arr)
     for i in range(list_length-1):
         # flag 用于判断在一次遍历过程中，是否发生交换
         # 若没有发生交换，则说明已经排序完成，无需继续循环，跳出
         flag = False
         for j in range(list_length-1-i):
-            if my_list[j] > my_list[j+1]:
-                my_list[j], my_list[j+1] = my_list[j+1], my_list[j]
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
                 flag = True
         if flag is False:
             break
-    return my_list
+    return arr
 
 
-def insertion_sort(my_list):
+def insertion_sort(arr):
     """
     插入排序：类似于抓牌的方法, 基本操作是将一条元素插入到已排号的序列当中，从而得到一个有序的序列。
     时间复杂度：O（n^2)， 空间复杂度：O（1）
@@ -30,21 +30,21 @@ def insertion_sort(my_list):
     算法简单稳定，容易实现，也适用于链式存储结构，在单链表中只需修改指针，更适用于初始记录基本有序的情况。
     对于查找插入位置，我们可以用二分查找获取位置
     """
-    list_length = len(my_list)
+    list_length = len(arr)
     # 默认已经有一张牌（一个元素），从第二个开始循环
     for i in range(1, list_length):
         # tmp为新抓的牌
-        tmp = my_list[i]
+        tmp = arr[i]
         j = i - 1
         # 从后往前循环，比较大小
-        while j >= 0 and tmp < my_list[j]:
-            my_list[j+1] = my_list[j]
+        while j >= 0 and tmp < arr[j]:
+            arr[j + 1] = arr[j]
             j -= 1
-        my_list[j + 1] = tmp
-    return my_list
+        arr[j + 1] = tmp
+    return arr
 
 
-def shell_sort(my_list):
+def shell_sort(arr):
     """
     希尔排序：分组插入排序,插入排序的改进版
     定义一个增量序列（逐渐减小直至为1），按照序列中元素的大小，间隔地进行插入排序
@@ -57,42 +57,42 @@ def shell_sort(my_list):
     希尔排序只能用于顺序存储结构，不能用于链式存储结构，增量gap可以有各种取法，但最后一次gap必须等于1,
     总比较次数和移动次数较直接插入排序少，当n越大，序列越无序时，效果越明显。
     """
-    list_length = len(my_list)
+    list_length = len(arr)
     gap = list_length // 2
     while gap > 0:
         # 对每隔gap的元素集合，进行简单插入排序
         for i in range(gap, list_length, gap):
             # 默认已有一张牌j，从i开始作比较
-            tmp = my_list[i]
+            tmp = arr[i]
             j = i - gap
             # 从后往前循环，比较大小
-            while j >= 0 and tmp < my_list[j]:
-                my_list[j + gap] = my_list[j]
+            while j >= 0 and tmp < arr[j]:
+                arr[j + gap] = arr[j]
                 j -= gap
             # 将新牌tmp插入保存的插入位置，因为上一步循环最后j减去了一个gap，需要加上
-            my_list[j + gap] = tmp
+            arr[j + gap] = tmp
         gap //= 2
-    return my_list
+    return arr
 
 
-def selection_sort(my_list):
+def selection_sort(arr):
     """
     选择排序：最简单直观的排序
     在未排序序列中找到最小元素，存放到排序序列的起始位置。再从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾
     优点：简单，稳定
     缺点：O(N^2)的复杂度
     """
-    list_length = len(my_list)
+    list_length = len(arr)
     for i in range(list_length-1):
         min_idx = i
         for j in range(i+1, list_length):
-            if my_list[j] < my_list[min_idx]:
+            if arr[j] < arr[min_idx]:
                 min_idx = j
-        my_list[i], my_list[min_idx] = my_list[min_idx], my_list[i]
-    return my_list
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
 
 
-def heap_sort(my_list):
+def heap_sort(arr):
     """
     堆排序：利用最大堆进行改进，也是选择排序的思路演变而来
     时间复杂度：小于O（nlogn），空间复杂度：O（nlogn）
@@ -119,17 +119,17 @@ def heap_sort(my_list):
         return l
 
     # 建立最大堆
-    length = len(my_list) - 1
-    creat_max_heap(my_list, length)
-    for i in range(length, 0, -1):
+    length = len(arr)
+    creat_max_heap(arr, length)
+    for i in range(length-1, 0, -1):
         # 将last元素与堆顶最大元素互换
-        my_list[i], my_list[0] = my_list[0], my_list[i]
+        arr[i], arr[0] = arr[0], arr[i]
         # 再在循环进行下沉过程中,不断剔除当前的最大项(第i项)
-        adjust_down(my_list, 0, i-1)
-    return my_list
+        adjust_down(arr, 0, i - 1)
+    return arr
 
 
-def merge_sort(my_list):
+def merge_sort(arr):
     """
     归并排序：采用分治法，结合二叉树性质
     优点：无适应性问题，无论对于什么样的序列它都要做logN遍的递归，时间复杂度是固定的NlogN，算法稳定
@@ -154,11 +154,11 @@ def merge_sort(my_list):
         return merged
 
     # 递归方法：不断对子序列进行merge_sort再合并
-    if len(my_list) <= 1:
-        return my_list
-    middle = len(my_list) // 2
-    left = merge_sort(my_list[0:middle])
-    right = merge_sort(my_list[middle:])
+    if len(arr) <= 1:
+        return arr
+    middle = len(arr) // 2
+    left = merge_sort(arr[0:middle])
+    right = merge_sort(arr[middle:])
     return merge(left, right)
 
     # # 非递归方法
@@ -181,7 +181,7 @@ def merge_sort(my_list):
     # return my_list
 
 
-def quick_sort(my_list):
+def quick_sort(arr):
     """
     快速排序算法，是最实用的排序算法，各大语言标准库的排序函数也基本都是基于快排实现的
     优点：平均时间复杂度O(NlogN), 空间复杂度至少O(logN)
@@ -211,11 +211,11 @@ def quick_sort(my_list):
         q_sort(array, low, i - 1)
         q_sort(array, i + 1, high)
 
-    q_sort(my_list, 0, len(my_list)-1)
-    return my_list
+    q_sort(arr, 0, len(arr) - 1)
+    return arr
 
 
-def radix_sort(my_list):
+def radix_sort(arr):
     """
     基数排序：桶排序的改进版
     优点：时间复杂度O(D(N+R)),D为轮次（最大数有几位，即有及轮次），N为元素数，R为桶的数量（进制数）
@@ -223,7 +223,7 @@ def radix_sort(my_list):
     """
     digit = 1  # 初始位数为个位，“次位优先”
     max_digit = 1  # 最大数的位数有几位
-    max_item = max(my_list)
+    max_item = max(arr)
     while max_item >= 10 ** max_digit:
         max_digit += 1
 
@@ -231,7 +231,7 @@ def radix_sort(my_list):
         bucket = {}  # 用字典构建桶
         for i in range(10):
             bucket.setdefault(i, [])  # 将每个桶置空
-        for i in my_list:
+        for i in arr:
             radix = int(i / (10**(digit-1)) % 10)  # 获取每个元素在当前位数的基数
             bucket[radix].append(i)  # 将对应基数的元素加到对应的桶当中
         # 再将桶中的元素串接起来
@@ -241,14 +241,14 @@ def radix_sort(my_list):
             if len(bucket[i]) > 0:
                 for j in bucket[i]:
                     tmp_list.append(j)
-        my_list = tmp_list
+        arr = tmp_list
         # 位数进一，以进行下一轮次的排序
         digit += 1
 
-    return my_list
+    return arr
 
 
 test_list = [1, 12, 5, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
-result = quick_sort(test_list)
+result = radix_sort(test_list)
 for item in result:
-    print(item)
+    print(item, end=' ')
