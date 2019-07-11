@@ -114,7 +114,6 @@ def heap_sort(arr):
     def creat_max_heap(arr, length):
         for parent_idx in range(length//2, -1, -1):
             adjust_down(arr, parent_idx, length)
-        return arr
 
     # 建立最大堆
     length = len(arr) - 1
@@ -247,6 +246,7 @@ def radix_sort(arr):
 
 
 test_list = [1, 12, 5, 5, 3, 7, 10, 143, 9, 6, 11, 4, 155, 13, 2, 8]
+# test_list = [1, 5, 3, 2]
 result = heap_sort(test_list)
 for item in result:
     print(item, end=' ')
