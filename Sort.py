@@ -102,6 +102,7 @@ def heap_sort(arr):
         tmp = arr[parent_idx]
         while parent_idx*2 + 1 <= length:
             child_idx = parent_idx * 2 + 1
+            # 找左右子节点中更大的那个，与parent互换
             if child_idx != length and arr[child_idx] < arr[child_idx+1]:
                 child_idx += 1
             if tmp < arr[child_idx]:
