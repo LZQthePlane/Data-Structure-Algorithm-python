@@ -1,4 +1,5 @@
 # https://blog.csdn.net/qq_41431457/article/details/85262605
+# https://www.jianshu.com/p/0954097a444e
 def bubble_sort(arr):
     """
     冒泡排序
