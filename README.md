@@ -17,4 +17,4 @@
 ### Sort algorithm
  - including **Bubble sort, Insertion sort, Shell sort, Selection sort， Heap sort, Merge sort，Quick sort, Radix sort**
  <p align>
-    <img src="https://github.com/LZQthePlane/Data-Structure-Algorithm-python/blob/master/sort_summary.png", width="720">
+    <img src="https://github.com/LZQthePlane/Data-Structure-Algorithm-python/blob/master/sort_summary.jpg", width="720">
