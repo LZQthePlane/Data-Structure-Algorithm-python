@@ -1,6 +1,6 @@
 # https://blog.csdn.net/qq_41431457/article/details/85262605
 # https://www.jianshu.com/p/0954097a444e 稳定性分析
-# 单链表可使用的排序：冒泡、选择、快排、归并
+# 单链表可使用的排序：冒泡、选择、快排、归并 # https://blog.csdn.net/qq_36528114/article/details/79566285
 def bubble_sort(arr):
     """
     冒泡排序
